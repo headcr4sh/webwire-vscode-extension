@@ -1,0 +1,13 @@
+webwire 1.0;
+
+struct HelloRequest {
+    name: String,
+}
+
+struct HelloResponse {
+    message: String,
+}
+
+service Hello {
+    hello: HelloRequest -> HelloResponse
+}

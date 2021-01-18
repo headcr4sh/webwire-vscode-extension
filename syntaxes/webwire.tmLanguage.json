@@ -1,0 +1,94 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json#",
+  "fileTypes": [
+    ".webwire"
+  ],
+  "firstLineMatch": "^webwire\\s+(1\\.0)$",
+  "foldingStartMarker": "\\{\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
+  "name": "Webwire Interface Description Language",
+  "patterns": [
+    {
+      "include": "#ww-file-decl"
+    },
+    {
+      "include": "#ww-expression"
+    }
+  ],
+  "repository": {
+    "ww-file-decl": {
+      "begin": "\\b(?<name>webwire)\\s*(?<version>(?<version_major>\\d+)\\.(?<version_minor>\\d+))\\s*",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.file-decl.name.webwire" },
+        "2": { "name": "constant.numeric.file-decl.version.webwire"}
+      },
+      "comment": "This is the magic string sequence that marks any given Webwire source.",
+      "end": "(;)$",
+      "endCaptures": {
+        "1": { "name" : "entity.other.file-decl.end.webwire" }
+      }
+    },
+    "ww-struct": {
+      "begin": "\\b(?<keyword>struct)\\s+(?<identifier>[a-zA-Z][a-zA-Z0-9_]*)(\\s*(<)((?<generic_id0>[a-zA-Z][a-zA-Z0-9_]*)(\\s*,\\s*(?<generic_id1>[a-zA-Z0-9_])*)*)(>))?\\s*(?<bracket_open>{)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.struct.name.webwire"},
+        "2": { "name": "variable.language.struct.webwire"},
+        "4": { "name": "entity.other.generics.start.webwire"},
+        "5": { "name": "variable.parameter.generics.webwire"},
+        "9": { "name": "entity.other.generics.end.webwire"},
+        "10": { "name": "entity.other.bracket_open.struct.webwire"}
+      },
+      "end": "(?<bracket_close>})",
+      "endCaptures": {
+        "1": { "name": "entity.other.bracket_close.struct.webwire"}
+      },
+      "patterns": [
+        { "include": "#ww-type-builtin" }
+      ]
+    },
+    "ww-expression": {
+      "patterns": [
+        {
+          "include": "#ww-struct"
+        }
+      ]
+    },
+    "ww-keyword": {
+      "patterns": [
+        {
+          "match": "\\b(struct|service)\\b",
+          "name": "keyword.control.webwire"
+        }
+      ]
+    },
+    "ww-operator": {
+      "patterns": [
+        {
+          "match": "(\\-\\>)",
+          "name": "keyword.operator.webwire"
+        }
+      ]
+    },
+    "ww-type-builtin": {
+      "patterns": [
+        {
+          "match": "\\b(Boolean|Integer|Float|String|Date|Time|DateTime|UUID|None|Nullable|Result)\\b",
+          "name": "support.type.builtin.webwire"
+        }
+      ]
+    },
+    "ww-string": {
+      "begin": "\"",
+      "end": "\"",
+      "name": "string.quoted.double.webwire",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.webwire"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.webwire",
+  "uuid": "67027a20-eff1-4d65-abc6-481179654a14"
+}

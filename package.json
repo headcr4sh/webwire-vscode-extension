@@ -1,0 +1,35 @@
+{
+  "name": "webwire",
+  "displayName": "Webwire",
+  "description": "Support for Webwire Interface Description Language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.52.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "webwire",
+        "aliases": [
+          "Webwire Interface Description Language",
+          "Webwire IDL",
+          "webwire"
+        ],
+        "extensions": [
+          ".webwire"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "webwire",
+        "scopeName": "source.webwire",
+        "path": "./syntaxes/webwire.tmLanguage.json"
+      }
+    ]
+  }
+}
